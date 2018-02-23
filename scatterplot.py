@@ -1,6 +1,6 @@
 import matplotlib
 matplotlib.use('svg')
-from matplotllib import pyplot as plt 
+from matplotlib import pyplot as plt 
 
 import pandas as pd
 
