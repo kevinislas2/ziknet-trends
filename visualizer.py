@@ -1,6 +1,7 @@
+import matplotlib
+matplotlib.use('Agg')
 import pandas as pd 
 import matplotlib.pyplot as plt 
-matplotlib.use('Agg')
 from cities import getCityDictionary
 
 def getCurrentStatusPlot(numberOfMaxSelectedStates, year, states, filename):
