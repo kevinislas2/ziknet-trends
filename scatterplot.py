@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt 
+matplotlib.use('Agg')
 import pandas as pd
 
 from cities import getCityDictionary
