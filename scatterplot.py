@@ -1,5 +1,7 @@
-import matplotlib.pyplot as plt 
-matplotlib.use('Agg')
+import matplotlib
+matplotlib.use('svg')
+from matplotllib import pyplot as plt 
+
 import pandas as pd
 
 from cities import getCityDictionary
