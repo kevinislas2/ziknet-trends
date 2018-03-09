@@ -11,6 +11,10 @@ app.config.from_object(Config)
 def hello():
 	return "Hello World!"
 
+@app.route("/home")
+def home():
+	return render_template("pages/home.html")
+
 @app.route("/index")
 def index():
 	user = {"username":"Kevin"}
@@ -87,6 +91,34 @@ def scatterplot():
 	### So that we can send the string within base64 noation
 	result = str(figdata_png)[2:-1]
 	return render_template('scatter.html',
+		result=result, 
+		form=form)
+
+@app.route("/scatter", methods=["GET", "POST"])
+def scatter():
+	import matplotlib.pyplot as plt
+	from io import BytesIO
+	import base64
+	from pandas.plotting import scatter_matrix
+	#Set up Form
+	form = ScatterForm()
+
+	#Check if POST
+	year = (form.year.data and str(form.year.data)) or "ALL"
+	state = form.statesCheckbox.data
+	#Getting plot
+	scatterplot = getScatterPlot(year, state)
+	scatter_matrix(scatterplot)
+
+	figfile = BytesIO()
+	plt.savefig(figfile, format='png')
+	figfile.seek(0)
+	figdata_png = base64.b64encode(figfile.getvalue())
+	result = figdata_png
+	### Remove b' from begining and ' in the end
+	### So that we can send the string within base64 noation
+	result = str(figdata_png)[2:-1]
+	return render_template('pages/scatterplot.html',
 		result=result, 
 		form=form)
 

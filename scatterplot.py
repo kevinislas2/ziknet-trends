@@ -20,7 +20,7 @@ def getScatterPlot(year, state):
 	else:
 		model = model.loc["Mexico-Veracruz_de_Ignacio_de_la_Llave"]
 
-	print(model)
+	# print(model)
 	model.drop(["Date", "Population", "cases/100K"], axis=1, inplace=True)
 	return model
 

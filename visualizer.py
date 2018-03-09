@@ -32,7 +32,7 @@ def getCurrentStatusPlot(numberOfMaxSelectedStates, year, states, filename):
 
 	filteredCases = cases.head(numberOfMaxSelectedStates)
 
-	print(filteredCases[["Total"]])
+	# print(filteredCases[["Total"]])
 
 	return filteredCases.drop(["Total"], axis=1).T
 	# filteredCases.drop(["Total"], axis=1).T.plot()
