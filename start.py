@@ -122,5 +122,17 @@ def scatter():
 		result=result, 
 		form=form)
 
+@app.route("/map2016", methods=["GET", "POST"])
+def map2016():
+	return render_template("pages/map2016.html")
+
+@app.route("/map2017", methods=["GET", "POST"])
+def map2017():
+	return render_template("pages/map2017.html")
+
+@app.route("/map2018", methods=["GET", "POST"])
+def map2018():
+	return render_template("pages/map2018.html")
+
 if __name__ == "__main__":
 	app.run()
