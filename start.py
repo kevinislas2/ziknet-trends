@@ -3,9 +3,12 @@ from visualizer import getCurrentStatusPlot
 from forms import VisualizerForm, ScatterForm
 from config import Config
 from scatterplot import getScatterPlot
-
+import csv
 app = Flask(__name__)
 app.config.from_object(Config)
+import os
+
+
 
 @app.route("/")
 def hello():
@@ -133,6 +136,11 @@ def map2017():
 @app.route("/map2018", methods=["GET", "POST"])
 def map2018():
 	return render_template("pages/map2018.html")
+
+@app.route("/brasilCases", methods=["GET", "POST"])
+def brasilCases():
+	# getBrasil(2016)
+	return render_template("pages/brasilCases.html")
 
 if __name__ == "__main__":
 	app.run()

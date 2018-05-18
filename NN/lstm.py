@@ -37,14 +37,21 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
 		agg.dropna(inplace=True)
 	return agg
 
-dataset = read_csv('data/Weekly-Yucatan_15-11-2015_848.csv', header=0, index_col=0)
+# dataset = read_csv('data/Weekly-Veracruz_15-11-2015_848.csv', header=0, index_col=0)
+# dataset = read_csv('data/Weekly-Yucatan_15-11-2015_848.csv', header=0, index_col=0)
 # dataset = read_csv('data/Weekly-Bahia_04-01-2015_504.csv', header=0, index_col=0)
+# dataset = read_csv('data/Weekly-NuevoLeon_15-11-2015_848.csv', header=0, index_col=0)
+# dataset = read_csv('data/Weekly-Guerrero_15-11-2015_848.csv', header=0, index_col=0)
+dataset = read_csv('data/Weekly-Chiapas_15-11-2015_848.csv', header=0, index_col=0)
 #Standarize
 dataset[["searches"]] = dataset[["searches"]]/100
 
 # population = 8112505 #Veracruz
-population = 2097175 #Yucatan
+# population = 2097175 #Yucatan
+# population = 3533251 #Guerrero
+population = 5217908 #Chiapas
 # population = 15203934 #Bahia
+# population = 5119504 # NUevoLeon
 dataset[["cases"]] = dataset[["cases"]] * (100000 / population)
 # 
 values = dataset.values
@@ -53,7 +60,7 @@ values = values.astype('float32')
 
 
 # specify the number of lag hours
-n_hours =8
+n_hours = 3
 n_features = 2
 # frame as supervised learning
 reframed = series_to_supervised(values, n_hours, 1)
@@ -61,7 +68,7 @@ print(reframed.shape)
  
 # split into train and test sets
 values = reframed.values
-n_train_hours = 10
+n_train_hours = 0
 train = values[:n_train_hours, :]
 test = values[n_train_hours:, :]
 # split into input and outputs
@@ -91,9 +98,10 @@ else:
 
 	# design network
 	model = Sequential()
-	model.add(LSTM(100, input_shape=(train_X.shape[1], train_X.shape[2])))
+	model.add(LSTM(32, input_shape=(train_X.shape[1], train_X.shape[2]), return_sequences=True))
+	model.add(LSTM(32, return_sequences=False))
 	# model.add(LSTM(100, input_shape=(train_X.shape[1], train_X.shape[2]), return_sequences=False))
-	# model.add(Dense(512, activation="relu"))
+	model.add(Dense(128, activation="relu"))
 	# model.add(BatchNormalization())
 	# model.add(Dense(1, activation="sigmoid", kernel_constraint=non_neg()))
 	model.add(Dense(1))
@@ -144,7 +152,9 @@ for i in range(len(test_y)):
 
 print("REAL: ", test_y)
 print("PRED: ", yhat)
-
+pyplot.title("Chiapas_15-11-2015")
+pyplot.ylabel("Casos")
+pyplot.xlabel("Semana")
 pyplot.plot(x, yhat, label="Predicition")
 pyplot.plot(x, test_y, label="Actual Values")
 pyplot.legend()
