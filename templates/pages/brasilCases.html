@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="page-header">
-  <h1>2016 Cases</h1>
+  <h1>{{name}}</h1>
 </div>
 <!-- CREDITOS A https://gist.github.com/ponentesincausa/46d1d9a94ca04a56f93d?short_path=a291794 por el GEOJSON -->
 <div id='map'></div>
@@ -12,16 +12,16 @@
 
 	<!-- DATA FROM: https://gist.github.com/ponentesincausa/46d1d9a94ca04a56f93d#file-mexico-json  -->
 	<!-- DATA FROM https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/brazil-states.geojson -->
-	<script type="text/javascript" src="/static/js/brasilCases.js"" charset="UTF-8"></script> 
+	<script type="text/javascript" src={{brazilCasesFile}} charset="UTF-8"></script> 
 	<script type="text/javascript" charset="UTF-8">
 
 	// var map = L.map('map').setView([37.8, -96], 4); //USA
 	var map = L.map("map").setView([-15, -60], 2);
 
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZWxhcHVlc3Rvam9lIiwiYSI6ImNqZm9kaXE2eDFqa20yd21rYm95MmRhbmQifQ.3L-4e_qjwpRfAFIwCLgIRQ', {
-		maxZoom: 8,
+		maxZoom: 6,
 		minZoom:4,
-		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+		attribution: 'Zika cases retrieved from <a href="http://portalms.saude.gov.br/boletins-epidemiologicos">Ministério da Saúde</a>: Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
 			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
 			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 		id: 'mapbox.light'
@@ -38,7 +38,7 @@
 
 	info.update = function (props) {
 		this._div.innerHTML = '<h4>Zika cases per state</h4>' +  (props ?
-			'<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+			'<b>' + props.name + '</b><br />' + props.density + ' cases'
 			: 'Hover over a state');
 	};
 

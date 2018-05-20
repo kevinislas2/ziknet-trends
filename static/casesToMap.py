@@ -13,14 +13,14 @@ def readFile(filename):
 	return dictStates
 
 def main():
-	if len(sys.argv) != 2:
-		print("Usage: casesToMap.py filename.csv")
+	if len(sys.argv) != 3:
+		print("Usage: casesToMap.py filename.csv source.js output.js")
 		exit()
 
 	dictStates = readFile(sys.argv[1])
 	print(dictStates)
 	template = None
-	with open("brasilCases.json") as templateFile:
+	with open(sys.argv[2], encoding="utf-8") as templateFile:
 		template = json.load(templateFile)
 
 	for i in range(len(template["features"])):
@@ -32,7 +32,7 @@ def main():
 		template["features"][i]["properties"]["density"] = dictStates[idFeature]["Cases"]
 
 		# print(template["features"][i]["properties"])
-	with open("output.js", "w") as out:
+	with open(sys.argv[3], "w") as out:
 		out.write("mx = \n")
 		json.dump(template, out)
 

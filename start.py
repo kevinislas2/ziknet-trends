@@ -137,10 +137,21 @@ def map2017():
 def map2018():
 	return render_template("pages/map2018.html")
 
-@app.route("/brasilCases", methods=["GET", "POST"])
-def brasilCases():
-	# getBrasil(2016)
-	return render_template("pages/brasilCases.html")
+@app.route("/brazil2016", methods=["GET"])
+def brazil2016():
+	brazilCasesFile = "/static/js/brazilCases2016.js"
+	name = "Brazil 2016 Cases"
+	return render_template("pages/brasilCases.html",
+		brazilCasesFile = brazilCasesFile,
+		name = name)
+
+@app.route("/brazil2017", methods=["GET"])
+def brazil2017():
+	brazilCasesFile = "/static/js/brazilCases2017.js"
+	name = "Brazil 2017 Cases"
+	return render_template("pages/brasilCases.html", 
+		brazilCasesFile = brazilCasesFile,
+		name = name)
 
 if __name__ == "__main__":
 	app.run()
