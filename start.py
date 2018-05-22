@@ -9,12 +9,7 @@ app.config.from_object(Config)
 import os
 
 
-
 @app.route("/")
-def hello():
-	return "Hello World!"
-
-@app.route("/home")
 def home():
 	return render_template("pages/home.html")
 
@@ -152,6 +147,10 @@ def brazil2017():
 	return render_template("pages/brasilCases.html", 
 		brazilCasesFile = brazilCasesFile,
 		name = name)
+
+@app.route("/licence", methods=["GET"])
+def licence():
+	return render_template("pages/licence.html")
 
 if __name__ == "__main__":
 	app.run()

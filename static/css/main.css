@@ -26,6 +26,11 @@ a {
   background: #555;
   color: #FFF;
 }
+
+#invPhoto {
+	width: 100px;
+	height: 100px;
+}
 /* Main elements end */
 
 

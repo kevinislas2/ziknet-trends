@@ -101,6 +101,7 @@
                 <li><a>One more separated link</a></li>
               </ul>
             </li>
+            <li {% if request.endpoint == 'home2' %} class="active" {% endif %}><a href="{{ url_for('licence') }}">Licencing and Funding</a></li>
           </ul>
 <!--           <ul class="nav navbar-nav pull-right">
             <li><a href="{{ url_for('scatter') }}">Signup</a></li>
@@ -132,8 +133,9 @@
 
   <div id="footer">
     <div class="container">
-      <!-- <p>Your Company &copy; All Rights Reserved.</p> -->
-       <p> Site under development </p>
+      <p>&copy; 2018 Kevin Islas Abud</p>
+      <p>Flask template by <a href="https://github.com/realpython/flask-boilerplate">RealPython</a> used and extended under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></p>
+       <!-- <p> Site under development </p> -->
       {% block footer %}{% endblock %}
 
     </div>
