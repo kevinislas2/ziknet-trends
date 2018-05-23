@@ -101,7 +101,8 @@
                 <li><a>One more separated link</a></li>
               </ul>
             </li>
-            <li {% if request.endpoint == 'home2' %} class="active" {% endif %}><a href="{{ url_for('licence') }}">Licencing and Funding</a></li>
+            <li {% if request.endpoint == 'team' %} class="active" {% endif %}><a href="{{ url_for('team') }}">Development Team</a></li>
+            <li {% if request.endpoint == 'licence' %} class="active" {% endif %}><a href="{{ url_for('licence') }}">Licencing and Funding</a></li>
           </ul>
 <!--           <ul class="nav navbar-nav pull-right">
             <li><a href="{{ url_for('scatter') }}">Signup</a></li>

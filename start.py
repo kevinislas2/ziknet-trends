@@ -16,7 +16,7 @@ def home():
 @app.route("/index")
 def index():
 	user = {"username":"Kevin"}
-	return render_template("index.html", title="Home", user=user)
+	return render_template("index.html", title="Ziknet Trends", user=user)
 
 
 def basicPlotter(filename):
@@ -147,6 +147,10 @@ def brazil2017():
 	return render_template("pages/brasilCases.html", 
 		brazilCasesFile = brazilCasesFile,
 		name = name)
+
+@app.route("/team", methods=["GET"])
+def team():
+	return render_template("pages/team.html")
 
 @app.route("/licence", methods=["GET"])
 def licence():
