@@ -150,7 +150,7 @@ This is a normal paragraph following a header. GitHub is a code hosting platform
            });
   </script>
 
-<a href="/Graph.html">LINK</a>
+<a href="Graph.html">LINK</a>
 
 ## Header 2
 
