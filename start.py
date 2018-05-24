@@ -134,7 +134,7 @@ def map2018():
 
 @app.route("/brazil2016", methods=["GET"])
 def brazil2016():
-	brazilCasesFile = "/static/js/brazilCases2016.js"
+	brazilCasesFile = "static/js/brazilCases2016.js"
 	name = "Brazil 2016 Cases"
 	return render_template("pages/brasilCases.html",
 		brazilCasesFile = brazilCasesFile,
@@ -142,7 +142,7 @@ def brazil2016():
 
 @app.route("/brazil2017", methods=["GET"])
 def brazil2017():
-	brazilCasesFile = "/static/js/brazilCases2017.js"
+	brazilCasesFile = "static/js/brazilCases2017.js"
 	name = "Brazil 2017 Cases"
 	return render_template("pages/brasilCases.html", 
 		brazilCasesFile = brazilCasesFile,
