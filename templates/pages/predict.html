@@ -1,0 +1,21 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Predict using your data.</h1>
+</div>
+
+<p class="lead">Insert your own data in the text area, we expect a csv with "Searches,Cases" as a header.</p>
+
+<form action="{{ url_for('predictOutput')}}" method="post">
+    {{ form.hidden_tag() }}
+<!--      <textarea name="csvFile" rows="4" cols="50">
+		Searches,Cases
+
+	</textarea> -->
+	{{ form.csvText(cols="35", rows="20") }}}
+    <p>{{ form.habitants(required='required', type="number", min="1")}} </p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

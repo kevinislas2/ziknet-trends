@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, flash
 from visualizer import getCurrentStatusPlot
-from forms import VisualizerForm, ScatterForm
+from forms import VisualizerForm, ScatterForm, PredictForm
 from config import Config
 from scatterplot import getScatterPlot
 import csv
@@ -155,6 +155,21 @@ def team():
 @app.route("/licence", methods=["GET"])
 def licence():
 	return render_template("pages/licence.html")
+
+@app.route("/predict", methods=["GET"])
+def predict():
+
+	form = PredictForm()
+	return render_template("pages/predict.html", form=form)
+
+@app.route("/predictOutput", methods=["POST"])
+def predictOutput():
+	form = PredictForm()
+	if form.validate_on_submit():
+		habitants = form.habitants.data
+		csvText = form.csvText.data
+		return render_template("pages/predictOutput.html", out=habitants, csvText=csvText)
+	return render_template("pages/predictOutput.html")
 
 if __name__ == "__main__":
 	app.run()
