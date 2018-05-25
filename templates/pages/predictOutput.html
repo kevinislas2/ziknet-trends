@@ -7,7 +7,9 @@
 </div>
 
 <p>
-	{{csvText}}
+	{{ ht|safe}}
+	<br>
+	<a href="{{ url_for('predict') }}"> Back to Predict </a>
 </p>
 
 {% endblock %}

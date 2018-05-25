@@ -6,7 +6,10 @@
   <h1>Predict using your data.</h1>
 </div>
 
-<p class="lead">Insert your own data in the text area, we expect a csv with "Searches,Cases" as a header.</p>
+<p class="lead">Insert your own data in the text area, we expect a csv with "Searches,Cases" as a header.<br>
+
+If you don't have data but would like to try the LSTM network, you can test it with 
+</p>
 
 <form action="{{ url_for('predictOutput')}}" method="post">
     {{ form.hidden_tag() }}
@@ -14,8 +17,8 @@
 		Searches,Cases
 
 	</textarea> -->
-	{{ form.csvText(cols="35", rows="20") }}}
-    <p>{{ form.habitants(required='required', type="number", min="1")}} </p>
+	{{ form.csvText(cols="35", rows="10") }}<br>
+    {{ form.habitants.label}} {{ form.habitants(required='required', type="number", min="1")}}
     <p>{{ form.submit() }}</p>
 </form>
 {% endblock %}

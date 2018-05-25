@@ -34,5 +34,5 @@ class ScatterForm(FlaskForm):
 class PredictForm(FlaskForm):
 
 	habitants = IntegerField("Number of habitants")
-	csvText = StringField(u'Text', widget=TextArea())
+	csvText = StringField(u'Cases,Searches', widget=TextArea())
 	submit = SubmitField("Submit")
