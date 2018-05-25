@@ -6,9 +6,9 @@
   <h1>Predict using your data.</h1>
 </div>
 
-<p class="lead">Insert your own data in the text area, we expect a csv with "Searches,Cases" as a header.<br>
+<p class="lead">Insert your own data in the text area, we expect a csv with the data divided in "Searches,Cases" columns.<br>
 
-If you don't have data but would like to try the LSTM network, you can test it with 
+If you don't have data but would like to try the LSTM network, you can test it with any of our <a href="https://github.com/elapuestojoe/ziknet-trends/tree/master/LSTM/data">files</a>, you can select "raw" on Github and just copy/paste it, just remember to remove the first line ["Searches,Cases"]!
 </p>
 
 <form action="{{ url_for('predictOutput')}}" method="post">

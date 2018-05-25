@@ -53,8 +53,8 @@ def lstmPredict(csvText, habitants):
 		if(numberOfRows[1] != 2):
 			return "Error, must have only 2 features"
 		# Scale
-		# csvFile[0] /= 100
-		# csvFile[1] = csvFile[[1]].apply(lambda x: x*100000/habitants, axis=1)
+		csvFile[0] /= 100
+		csvFile[1] = csvFile[[1]].apply(lambda x: x*100000/habitants, axis=1)
 
 		#Ensure data is float values = dataset.values.astype("float32")
 		values = csvFile.values.astype("float32")
