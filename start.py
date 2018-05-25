@@ -175,5 +175,9 @@ def predictOutput():
 		return render_template("pages/predictOutput.html", out=habitants, csvText=csvText, ht=ht)
 	return render_template("pages/predictOutput.html")
 
+@app.route("/code", methods=["GET"])
+def code():
+	return render_template("pages/code.html")
+
 if __name__ == "__main__":
 	app.run()

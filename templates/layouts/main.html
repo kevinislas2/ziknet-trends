@@ -100,7 +100,8 @@
             </li>
             <li {% if request.endpoint == 'team' %} class="active" {% endif %}><a href="{{ url_for('team') }}">Development Team</a></li>
             <li {% if request.endpoint == 'licence' %} class="active" {% endif %}><a href="{{ url_for('licence') }}">Licencing and Funding</a></li>
-            <li {% if request.endpoint == 'predict' %} class="active" {% endif %}><a href="{{ url_for('predict') }}">Predict</a></li>            
+            <li {% if request.endpoint == 'predict' %} class="active" {% endif %}><a href="{{ url_for('predict') }}">Predict</a></li>
+            <li {% if request.endpoint == 'code' %} class="active" {% endif %}><a href="{{ url_for('code') }}">Code</a></li>           
           </ul>
 <!--           <ul class="nav navbar-nav pull-right">
             <li><a href="{{ url_for('scatter') }}">Signup</a></li>

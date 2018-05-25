@@ -5,7 +5,7 @@ from keras.models import model_from_json
 import numpy as np
 import matplotlib.pyplot as plt
 import mpld3
-
+from math import sqrt
 def loadModel():
 	with open("LSTM/LSTM.json", "r") as json_file:
 			loaded_model_json = json_file.read()
@@ -37,6 +37,13 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
 	if dropnan:
 		agg.dropna(inplace=True)
 	return agg
+
+
+def mse(y, yPred):
+	err = 0
+	for i in range(len(y)):
+		err += (y[i]-yPred[i])**2
+	return err / len(y)
 
 def lstmPredict(csvText, habitants):
 	x = 1
@@ -89,9 +96,11 @@ def lstmPredict(csvText, habitants):
 				xYPred.append(diff+i)
 				yPred.append(pred)
 				# yPred.append(pred)
-		# print(yPred)
-
+		print(yPred)
+		print(y)
+		rmse = sqrt(mse(yPred[:-1], y))
 		fig = plt.figure()
+		plt.title("RMSE: {:.2f} Next week prediction: {}".format(rmse, yPred[-1]))
 		plt.ylabel("Cases")
 		plt.xlabel("Week #")
 		plt.plot(y, label="Cases")
@@ -103,4 +112,5 @@ def lstmPredict(csvText, habitants):
 		return ht
 
 	except Exception as e:
+		print(e)
 		return "Something bad happened"
