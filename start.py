@@ -3,6 +3,8 @@ from visualizer import getCurrentStatusPlot
 from forms import VisualizerForm, ScatterForm, PredictForm
 from config import Config
 from scatterplot import getScatterPlot
+from lstm import lstmPredict
+
 import csv
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -168,7 +170,9 @@ def predictOutput():
 	if form.validate_on_submit():
 		habitants = form.habitants.data
 		csvText = form.csvText.data
-		return render_template("pages/predictOutput.html", out=habitants, csvText=csvText)
+
+		ht = lstmPredict(csvText, habitants)
+		return render_template("pages/predictOutput.html", out=habitants, csvText=csvText, ht=ht)
 	return render_template("pages/predictOutput.html")
 
 if __name__ == "__main__":
