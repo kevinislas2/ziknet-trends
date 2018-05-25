@@ -77,7 +77,16 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">Home<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{ url_for('home') }}">Home</a></li>
+                  <li><a href="{{ url_for('home') }}#method">Method</a></li>
+                  <li><a href="{{ url_for('home') }}#results">Results</a></li>
+                  <li><a href="{{ url_for('home') }}#future_work">Future work</a></li>
+                </ul>
+              </li>
+
             <li {% if request.endpoint == 'scatter' %} class="active" {% endif %}><a href="{{ url_for('scatter') }}">Scatterplot</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown">Map<b class="caret"></b></a>
@@ -87,18 +96,6 @@
                 <li><a href="{{ url_for('map2018')}}">Mexico 2018</a></li>
                 <li><a href="{{ url_for('brazil2016')}}">Brazil 2016</a></li>
                 <li><a href="{{ url_for('brazil2017')}}">Brazil 2017</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a>Action</a></li>
-                <li><a>Another action</a></li>
-                <li><a>Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a>Separated link</a></li>
-                <li><a>One more separated link</a></li>
               </ul>
             </li>
             <li {% if request.endpoint == 'team' %} class="active" {% endif %}><a href="{{ url_for('team') }}">Development Team</a></li>

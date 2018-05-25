@@ -9,7 +9,7 @@
 <p class="lead">Ziknet Trends is a project developed at ITESM that uses LSTM neural networks to develop a model that predicts Zika Virus epidemics using Google Trends search data.</p>
 
 <div class="page-header">
-  <h2>How does it work?</h1>
+  <h2>How does it work?</h2>
 </div>
 
 <p class="lead">Information retrieved from search engines reflects a population's particular interest or concern regarding specific topics. Ziknet-Trends is a real time monitoring system that correlates changes in search patterns and previous incidence information to predict when a population is at risk of a Zika outbreak.</p>
@@ -25,7 +25,7 @@
 	  </script>
 	</div>
 
-	<div id='map'  style="max-width: 500px; min-width: 10px; margin-right: 100px;" class="col-lg-6 col-md-6 col-sm-12"></div>
+	<div id='map'  style="max-width: 40%; min-width: 10px;" class="col-lg-6 col-md-6 col-sm-12"></div>
 		<!-- <script type="text/javascript" src="us-states.js"></script> -->
 		<!-- <script type="text/javascript" src="MxGEOJSON.js"></script> -->
 
@@ -160,7 +160,7 @@
 <br>
 <br>
 
-<div class="container-fluid">
+<!-- <div class="container-fluid">
 	<div class="row">
 		<div id="gTrends" style="max-width: 500px;" class="col-lg-6 col-md-6 col-sm-12">
 			<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/1435_RC10/embed_loader.js"></script>
@@ -170,7 +170,7 @@
   	</div>
 
 	</div>
-</div>
+</div> -->
 
 <div class="page-header">
   <h2>Why LSTM Networks?</h2>
@@ -178,11 +178,67 @@
 <p class="lead">LSTM networks have shown to be very efficient at time-series predictions</p>
 <!-- <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added within <code>#wrap</code> with <code>padding-top: 60px;</code> on the <code>.container</code>.</p>
  -->
-
  <div class="page-header">
-  <h2>Results</h2>
+ 	<h2 id="method">Method</h2>
+ </div>
+ <p class="lead">We obtained the following data:</p>
+ <ul>
+ 	<h3>Brazil</h3>
+ 	<li>Zika cases in Bahia state from 10-01-2015 to 15-05-2016 (72 Epi weeks)</li>
+ 	<li>Zika cases in Mato Grosso state from 10/01/2015 to 20/02/2016 (59 Epi weeks)</li>
+ 	<h3>Mexico</h3>
+ 	<li>Zika cases in Chiapas state from 28-11-2015 to 24-03-2018 (122 Epi weeks)</li>
+ 	<li>Zika cases in Guerrero state from 28-11-2015 to 24-03-2018 (122 Epi weeks)</li>
+ 	<li>Zika cases in Nuevo Leon state from 28-11-2015 to 24-03-2018 (122 Epi weeks)</li>
+ 	<li>Zika cases in Quintana Roo state from 28-11-2015 to 24-03-2018 (122 Epi weeks)</li>
+ 	<li>Zika cases in Veracruz state from 28-11-2015 to 24-03-2018 (122 Epi weeks)</li>
+ 	<li>Zika cases in Yucatán state from 28-11-2015 to 24-03-2018 (122 Epi weeks)</li>
+ </ul>
+
+ <p class="lead">The data was divided in the following way: </p>
+
+ <ul>
+ 	<h3>Training data:</h3>
+ 	<li>Guerrero</li>
+ 	<li>Quintana Roo</li>
+ 	<li>Yucatan</li>
+ 	<li>Veracruz</li>
+ 	<h3>Testing data*:</h3>
+ 	<li>Bahia</li>
+ 	<li>Chiapas</li>
+ 	<li>Mato Grosso</li>
+ 	<li>Nuevo Leon</li>
+ </ul>
+
+<p>*<font size="2">We decided to use both brazilian states in the testing dataset to show that our model is robust enough to adjust to unseen data even if it is in a much higher scale, as brazilian states had a considerably higher case incidence than mexican states</font></p>
+ <div class="page-header">
+ 	<h3>Data preprocessing</h3>
+ </div>
+<p class="lead">
+We transformed the number of cases to incidence per 100,000 habitants, for mexican states we retrieved the number of habitants per state from <a href="http://www.beta.inegi.org.mx/proyectos/enchogares/especiales/intercensal/">Instituto Nacional de Estadística y Geografía (INEGI)</a> and for brazilian states we retrieved the number of habitants per state from <a href="https://cidades.ibge.gov.br/brasil/ba/panorama">Instituto Brasileño de Geografía y Estadística (IBGE)</a>.<br>
+
+We used a lag window of four weeks, this means that our LSTM network needs the search information and case incidence per 100K habitants to predict the case incidence per 100K of the next week.
+</p>
+<img id="graphCenter" src="static/img/LSTMEXAMPLE.png"></img>
+
+<div class="page-header">
+  <h3>LSTM Architecture</h3>
 </div>
 
+<p class="lead">We developed an LSTM network in <a href="https://www.tensorflow.org/">Tensorflow</a> with three hidden layers of (128, 64, 32) LSTM units and one Dense unit as output.<br></p>
+ <img id="graphCenter" src="static/img/model.png">
+
+<div class="page-header">
+  <h2 id="results">Results</h2>
+</div>
+
+<p class="lead">The following graphs show the model's predictions over training data:</p>
+<img id="graphPred" src="static/img/Guerrero_28-11-2015-24-03-2018.png"></img>
+<img id="graphPred" src="static/img/QuintanaRoo_28-11-2015-24-03-2018.png"></img>
+<img id="graphPred" src="static/img/Yucatan_28-11-2015-24-03-2018.png"></img>
+<img id="graphPred" src="static/img/Veracruz_28-11-2015-24-03-2018.png"></img>
+
+<p class="lead">The following graphs show the model's predictions over testing <b>unseen</b> data:</p>
 <img id="graphPred" src="static/img/Chiapas_28-11-2015-24-03-2018.png"></img>
 
 <img id="graphPred" src="static/img/NuevoLeon_28-11-2015-24-03-2018.png"></img>
@@ -191,5 +247,10 @@
 <img id="graphPred" src="static/img/Bahia_10-01-2015-15-05-2016.png"></img>
 
 <img id="graphPred" src="static/img/Mato-Grosso_10-01-2015-20-02-2016.png"></img>
+
+<div class="page-header">
+  <h2 id="future_work">Future Work</h2>
+</div>
+
 
 {% endblock %}

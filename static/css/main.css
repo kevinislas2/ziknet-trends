@@ -37,6 +37,19 @@ a {
   display: inline-block;
   max-width: 45%;
 }
+
+#graphCenter {
+  display: block; 
+  margin: auto;
+  max-width: 90%;
+}
+h3 {
+  font-style: bold;
+}
+li {
+  font-size: 16px;
+}
+
 /*****************************************************************************
  * Various other styles
  ****************************************************************************/
