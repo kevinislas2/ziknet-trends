@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, SelectMultipleField, SubmitField, widgets, SelectField
 from cities import getCityDictionary
+from wtforms.widgets import TextArea
+from wtforms.fields import StringField
 
 class MultiCheckboxField(SelectMultipleField):
 	widget = widgets.ListWidget(prefix_label=False)
@@ -29,3 +31,8 @@ class ScatterForm(FlaskForm):
 	year = IntegerField("Filter by year")
 	submit = SubmitField("Submit")
 
+class PredictForm(FlaskForm):
+
+	habitants = IntegerField("Number of habitants")
+	csvText = StringField(u'Cases,Searches', widget=TextArea())
+	submit = SubmitField("Submit")

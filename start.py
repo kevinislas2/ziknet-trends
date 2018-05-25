@@ -1,8 +1,10 @@
 from flask import Flask, render_template, redirect, flash
 from visualizer import getCurrentStatusPlot
-from forms import VisualizerForm, ScatterForm
+from forms import VisualizerForm, ScatterForm, PredictForm
 from config import Config
 from scatterplot import getScatterPlot
+from lstm import lstmPredict
+
 import csv
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -155,6 +157,27 @@ def team():
 @app.route("/licence", methods=["GET"])
 def licence():
 	return render_template("pages/licence.html")
+
+@app.route("/predict", methods=["GET"])
+def predict():
+
+	form = PredictForm()
+	return render_template("pages/predict.html", form=form)
+
+@app.route("/predictOutput", methods=["POST"])
+def predictOutput():
+	form = PredictForm()
+	if form.validate_on_submit():
+		habitants = form.habitants.data
+		csvText = form.csvText.data
+
+		ht = lstmPredict(csvText, habitants)
+		return render_template("pages/predictOutput.html", out=habitants, csvText=csvText, ht=ht)
+	return render_template("pages/predictOutput.html")
+
+@app.route("/code", methods=["GET"])
+def code():
+	return render_template("pages/code.html")
 
 if __name__ == "__main__":
 	app.run()

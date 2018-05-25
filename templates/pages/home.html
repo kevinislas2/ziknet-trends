@@ -6,164 +6,237 @@
   <h1>Ziknet Trends</h1>
 </div>
 <!-- <p class="lead">Ziknet Trends is a project developed at ITESM to predict the number of Zika cases in Mexico using climate data and Google Trends.</p> -->
-<p class="lead">Ziknet Trends is a project developed at ITESM that uses LSTM neural networks to develop a model that predicts Zika Virus epidemics using Google Trends search data.</p>
+<p class="lead">Ziknet Trends is a project developed at ITESM that uses LSTM networks to develop a model that predicts Zika Virus epidemics using Google Trends search data.</p>
 
 <div class="page-header">
-  <h2>How does it work?</h1>
+  <h2>How does it work?</h2>
 </div>
 
 <p class="lead">Information retrieved from search engines reflects a population's particular interest or concern regarding specific topics. Ziknet-Trends is a real time monitoring system that correlates changes in search patterns and previous incidence information to predict when a population is at risk of a Zika outbreak.</p>
 
 <p class="lead">The following graphs shows search patterns and the number of Zika cases in Mexico in 2016, there is a subtle yet noticeable correlation between search incidence and the total number of cases.</p>
-<div id="gTrends" style="width: 40%; display: inline-block; margin-right: 5%;">
-  <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/1420_RC05/embed_loader.js"></script>
-  <script type="text/javascript">
-    trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"Zika","geo":"MX","time":"2016-01-01 2016-12-31"}],"category":0,"property":""}, {"exploreQuery":"date=2016-01-01%202016-12-31&geo=MX&q=Zika","guestPath":"https://trends.google.com.mx:443/trends/embed/"});
-  </script>
-</div>
 
-<div id='map'style="width: 45%; display: inline-block;"></div>
-	<!-- <script type="text/javascript" src="us-states.js"></script> -->
-	<!-- <script type="text/javascript" src="MxGEOJSON.js"></script> -->
+<div class="container-fluid">
+	<div class="row">
+	<div id="gTrends" style="max-width: 500px;" class="col-lg-6 col-md-6 col-sm-12">
+	  <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/1420_RC05/embed_loader.js"></script>
+	  <script type="text/javascript">
+		trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"Zika","geo":"MX","time":"2016-01-01 2016-12-31"}],"category":0,"property":""}, {"exploreQuery":"date=2016-01-01%202016-12-31&geo=MX&q=Zika","guestPath":"https://trends.google.com.mx:443/trends/embed/"});
+	  </script>
+	</div>
 
-	<!-- DATA FROM: https://gist.github.com/ponentesincausa/46d1d9a94ca04a56f93d#file-mexico-json  -->
-	<script type="text/javascript" src="/static/js/2016Cases.js"" charset="UTF-8"></script> 
-	<script type="text/javascript" charset="UTF-8">
+	<div id='map'  style="max-width: 40%; min-width: 10px;" class="col-lg-6 col-md-6 col-sm-12"></div>
+		<!-- <script type="text/javascript" src="us-states.js"></script> -->
+		<!-- <script type="text/javascript" src="MxGEOJSON.js"></script> -->
 
-	// var map = L.map('map').setView([37.8, -96], 4); //USA
-	var map = L.map("map").setView([23.5, -102], 4);
+		<!-- DATA FROM: https://gist.github.com/ponentesincausa/46d1d9a94ca04a56f93d#file-mexico-json  -->
+		<!-- <script type="text/javascript" src="/static/js/2016Cases.js"" charset="UTF-8"></script> -->
+		<script type="text/javascript" src="/static/js/2016Cases.js"" charset="UTF-8"></script> 
+		<script type="text/javascript" charset="UTF-8">
 
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZWxhcHVlc3Rvam9lIiwiYSI6ImNqZm9kaXE2eDFqa20yd21rYm95MmRhbmQifQ.3L-4e_qjwpRfAFIwCLgIRQ', {
-		maxZoom: 5,
-		minZoom:4,
-		attribution: 'Zika cases retrieved from <a href="https://www.gob.mx/salud/acciones-y-programas/direccion-general-de-epidemiologia-boletin-epidemiologico"> Dirección General de Epidemiología </a> Map GeoJson data from <a href="https://gist.github.com/ponentesincausa/46d1d9a94ca04a56f93d#file-mexico-json">ponentesincausa</a>; ' +
-			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-		id: 'mapbox.light'
-	}).addTo(map);
+		// var map = L.map('map').setView([37.8, -96], 4); //USA
+		var map = L.map("map").setView([23.5, -102], 4);
 
-	// control that shows state info on hover
-	var info = L.control();
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZWxhcHVlc3Rvam9lIiwiYSI6ImNqZm9kaXE2eDFqa20yd21rYm95MmRhbmQifQ.3L-4e_qjwpRfAFIwCLgIRQ', {
+			maxZoom: 5,
+			minZoom:4,
+			attribution: 'Zika cases retrieved from <a href="https://www.gob.mx/salud/acciones-y-programas/direccion-general-de-epidemiologia-boletin-epidemiologico"> Dirección General de Epidemiología </a> Map GeoJson data from <a href="https://gist.github.com/ponentesincausa/46d1d9a94ca04a56f93d#file-mexico-json">ponentesincausa</a>; ' +
+				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			id: 'mapbox.light'
+		}).addTo(map);
 
-	info.onAdd = function (map) {
-		this._div = L.DomUtil.create('div', 'info');
-		this.update();
-		return this._div;
-	};
+		// control that shows state info on hover
+		var info = L.control();
 
-	info.update = function (props) {
-		this._div.innerHTML = '<h4>Zika cases in 2016</h4>' +  (props ?
-			'<b>' + props.name + '</b><br />' + props.density + ' cases'
-			: 'Hover over a state');
-	};
-
-	info.addTo(map);
-
-
-	// get color depending on population density value
-	function getColor(d) {
-		return d > 1500 ? '#800026' :
-				d > 1000  ? '#BD0026' :
-				d > 500  ? '#E31A1C' :
-				d > 250 ? '#FC4E2A' :
-				d > 100   ? '#FD8D3C' :
-				d > 50   ? '#FEB24C' :
-				d > 10  ? '#FED976' :
-							'#FFEDA0';
-	}
-
-	function style(feature) {
-		return {
-			weight: 2,
-			opacity: 1,
-			color: 'white',
-			dashArray: '3',
-			fillOpacity: 0.7,
-			fillColor: getColor(feature.properties.density)
+		info.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info');
+			this.update();
+			return this._div;
 		};
-	}
 
-	function highlightFeature(e) {
-		var layer = e.target;
+		info.update = function (props) {
+			this._div.innerHTML = '<h4>Zika cases in 2016</h4>' +  (props ?
+				'<b>' + props.name + '</b><br />' + props.density + ' cases'
+				: 'Hover over a state');
+		};
 
-		layer.setStyle({
-			weight: 5,
-			color: '#666',
-			dashArray: '',
-			fillOpacity: 0.7
-		});
+		info.addTo(map);
 
-		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-			layer.bringToFront();
+
+		// get color depending on population density value
+		function getColor(d) {
+			return d > 1500 ? '#800026' :
+					d > 1000  ? '#BD0026' :
+					d > 500  ? '#E31A1C' :
+					d > 250 ? '#FC4E2A' :
+					d > 100   ? '#FD8D3C' :
+					d > 50   ? '#FEB24C' :
+					d > 10  ? '#FED976' :
+								'#FFEDA0';
 		}
 
-		info.update(layer.feature.properties);
-	}
-
-	var geojson;
-
-	function resetHighlight(e) {
-		geojson.resetStyle(e.target);
-		info.update();
-	}
-
-	function zoomToFeature(e) {
-		map.fitBounds(e.target.getBounds());
-	}
-
-	function onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
-		});
-	}
-
-	geojson = L.geoJson(mx, {
-		style: style,
-		onEachFeature: onEachFeature
-	}).addTo(map);
-
-
-	// map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
-
-	var legend = L.control({position: 'bottomright'});
-
-	legend.onAdd = function (map) {
-
-		var div = L.DomUtil.create('div', 'info legend'),
-			grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-			labels = [],
-			from, to;
-
-		for (var i = 0; i < grades.length; i++) {
-			from = grades[i];
-			to = grades[i + 1];
-
-			labels.push(
-				'<i style="background:' + getColor(from + 1) + '"></i> ' +
-				from + (to ? '&ndash;' + to : '+'));
+		function style(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColor(feature.properties.density)
+			};
 		}
 
-		div.innerHTML = labels.join('<br>');
-		return div;
-	};
+		function highlightFeature(e) {
+			var layer = e.target;
 
-	legend.addTo(map);
+			layer.setStyle({
+				weight: 5,
+				color: '#666',
+				dashArray: '',
+				fillOpacity: 0.7
+			});
+
+			if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+				layer.bringToFront();
+			}
+
+			info.update(layer.feature.properties);
+		}
+
+		var geojson;
+
+		function resetHighlight(e) {
+			geojson.resetStyle(e.target);
+			info.update();
+		}
+
+		function zoomToFeature(e) {
+			map.fitBounds(e.target.getBounds());
+		}
+
+		function onEachFeature(feature, layer) {
+			layer.on({
+				mouseover: highlightFeature,
+				mouseout: resetHighlight,
+				click: zoomToFeature
+			});
+		}
+
+		geojson = L.geoJson(mx, {
+			style: style,
+			onEachFeature: onEachFeature
+		}).addTo(map);
+
+
+		// map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
+
+		var legend = L.control({position: 'bottomright'});
+
+		legend.onAdd = function (map) {
+
+			var div = L.DomUtil.create('div', 'info legend'),
+				grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+				labels = [],
+				from, to;
+
+			for (var i = 0; i < grades.length; i++) {
+				from = grades[i];
+				to = grades[i + 1];
+
+				labels.push(
+					'<i style="background:' + getColor(from + 1) + '"></i> ' +
+					from + (to ? '&ndash;' + to : '+'));
+			}
+
+			div.innerHTML = labels.join('<br>');
+			return div;
+		};
+
+		legend.addTo(map);
 
 	</script>
+	</div>
+</div>
+<br>
+<br>
 
+<!-- <div class="container-fluid">
+	<div class="row">
+		<div id="gTrends" style="max-width: 500px;" class="col-lg-6 col-md-6 col-sm-12">
+			<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/1435_RC10/embed_loader.js"></script>
+			<script type="text/javascript">
+			trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"zika","geo":"BR","time":"2016-01-01 2016-12-31"}],"category":0,"property":""}, {"exploreQuery":"date=2016-01-01%202016-12-31&geo=BR&q=zika","guestPath":"https://trends.google.com.mx:443/trends/embed/"});
+  		</script>
+  	</div>
+
+	</div>
+</div> -->
 
 <div class="page-header">
   <h2>Why LSTM Networks?</h2>
 </div>
 <p class="lead">LSTM networks have shown to be very efficient at time-series predictions</p>
-<!-- <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added within <code>#wrap</code> with <code>padding-top: 60px;</code> on the <code>.container</code>.</p>
- -->
-
  <div class="page-header">
-  <h2>Results</h2>
+ 	<h2 id="method">Method</h2>
+ </div>
+ <p class="lead">We obtained the following data:</p>
+ <ul>
+ 	<h3>Brazil</h3>
+ 	<li>Zika cases in Bahia state from 10-01-2015 to 15-05-2016 (72 Epi weeks)</li>
+ 	<li>Zika cases in Mato Grosso state from 10/01/2015 to 20/02/2016 (59 Epi weeks)</li>
+ 	<h3>Mexico</h3>
+ 	<li>Zika cases in Chiapas state from 28-11-2015 to 24-03-2018 (122 Epi weeks)</li>
+ 	<li>Zika cases in Guerrero state from 28-11-2015 to 24-03-2018 (122 Epi weeks)</li>
+ 	<li>Zika cases in Nuevo Leon state from 28-11-2015 to 24-03-2018 (122 Epi weeks)</li>
+ 	<li>Zika cases in Quintana Roo state from 28-11-2015 to 24-03-2018 (122 Epi weeks)</li>
+ 	<li>Zika cases in Veracruz state from 28-11-2015 to 24-03-2018 (122 Epi weeks)</li>
+ 	<li>Zika cases in Yucatán state from 28-11-2015 to 24-03-2018 (122 Epi weeks)</li>
+ </ul>
+
+ <p class="lead">The data was divided in the following way: </p>
+
+ <ul>
+ 	<h3>Training data:</h3>
+ 	<li>Guerrero</li>
+ 	<li>Quintana Roo</li>
+ 	<li>Yucatan</li>
+ 	<li>Veracruz</li>
+ 	<h3>Testing data*:</h3>
+ 	<li>Bahia</li>
+ 	<li>Chiapas</li>
+ 	<li>Mato Grosso</li>
+ 	<li>Nuevo Leon</li>
+ </ul>
+
+<p>*<font size="2">We decided to use both brazilian states in the testing dataset to show that our model is robust enough to adjust to unseen data even if it is in a much higher scale, as brazilian states had a considerably higher case incidence than mexican states</font></p>
+ <div class="page-header">
+ 	<h3>Data preprocessing</h3>
+ </div>
+<p class="lead">
+We transformed the number of cases to incidence per 100,000 habitants, for mexican states we retrieved the number of habitants per state from <a href="http://www.beta.inegi.org.mx/proyectos/enchogares/especiales/intercensal/">Instituto Nacional de Estadística y Geografía (INEGI)</a> and for brazilian states we retrieved the number of habitants per state from <a href="https://cidades.ibge.gov.br/brasil/ba/panorama">Instituto Brasileño de Geografía y Estadística (IBGE)</a>.<br>
+
+We used a lag window of four weeks, this means that our LSTM network needs the search information and case incidence per 100K habitants to predict the case incidence per 100K of the next week.
+</p>
+<img id="graphCenter" src="static/img/LSTMEXAMPLE.png"></img>
+
+<div class="page-header">
+  <h3>LSTM Architecture</h3>
 </div>
 
+<p class="lead">We developed an LSTM network in <a href="https://www.tensorflow.org/">Tensorflow</a> with three hidden layers of (128, 64, 32) LSTM units and one Dense unit as output.<br></p>
+ <img id="graphCenter" src="static/img/model.png">
+
+<div class="page-header">
+  <h2 id="results">Results</h2>
+</div>
+
+<p class="lead">The following graphs show the model's predictions over training data:</p>
+<img id="graphPred" src="static/img/Guerrero_28-11-2015-24-03-2018.png"></img>
+<img id="graphPred" src="static/img/QuintanaRoo_28-11-2015-24-03-2018.png"></img>
+<img id="graphPred" src="static/img/Yucatan_28-11-2015-24-03-2018.png"></img>
+<img id="graphPred" src="static/img/Veracruz_28-11-2015-24-03-2018.png"></img>
+
+<p class="lead">The following graphs show the model's predictions over testing <b>unseen</b> data:</p>
 <img id="graphPred" src="static/img/Chiapas_28-11-2015-24-03-2018.png"></img>
 
 <img id="graphPred" src="static/img/NuevoLeon_28-11-2015-24-03-2018.png"></img>
@@ -173,6 +246,9 @@
 
 <img id="graphPred" src="static/img/Mato-Grosso_10-01-2015-20-02-2016.png"></img>
 
+<div class="page-header">
+  <h2 id="future_work">Future Work</h2>
+</div>
 
 
 {% endblock %}

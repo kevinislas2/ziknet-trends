@@ -1,0 +1,26 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Predict using your data.</h1>
+</div>
+
+<p class="lead">Insert your own data in the text area, we expect a csv with the data divided in "Searches,Cases" columns.<br>
+
+If you don't have data but would like to try the LSTM network, you can test it with any of our <a href="https://github.com/elapuestojoe/ziknet-trends/tree/master/LSTM/data" target="_blank">files</a>, you can select "raw" on Github and just copy/paste it, just remember to remove the first line ["Searches,Cases"]!
+</p>
+
+<form action="{{ url_for('predictOutput')}}" method="post">
+    {{ form.hidden_tag() }}
+<!--      <textarea name="csvFile" rows="4" cols="50">
+		Searches,Cases
+
+	</textarea> -->
+	{{ form.csvText(cols="35", rows="10", placeholder="93,202\n70,49\n92,103\n59,89\n100,189") }}<br>
+    {{ form.habitants.label}} {{ form.habitants(required='required', type="number", min="1", placeholder="1,000,000")}}
+    <p>{{ form.submit() }}</p>
+</form>
+
+<p class="lead">Also, if you're interested in testing our LSTM network with data from another country, check out this great dataset of Zika cases from the <a href="https://github.com/cdcepi/zika">CDC Epidemic Prediction Initiative</a>.<br></p>
+{% endblock %}

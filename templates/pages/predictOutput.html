@@ -1,0 +1,15 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Prediction</h1>
+</div>
+
+<p>
+	{{ ht|safe}}
+	<br>
+	<a href="{{ url_for('predict') }}"> Back to Predict </a>
+</p>
+
+{% endblock %}
