@@ -48,7 +48,7 @@ def mse(y, yPred):
 def lstmPredict(csvText, habitants):
 	x = 1
 	try:
-		habitants = int(habitants)
+		habitants = long(habitants)
 		csvText.replace("\r", "")
 		csvFile = read_csv(StringIO(csvText), header=None)
 
