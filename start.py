@@ -146,7 +146,7 @@ def brazil2016():
 def brazil2017():
 	brazilCasesFile = "static/js/brazilCases2017.js"
 	name = "Brazil 2017 Cases"
-	return render_template("pages/brasilCases.html", 
+	return render_template("pages/brasilCases2017.html", 
 		brazilCasesFile = brazilCasesFile,
 		name = name)
 

@@ -1,9 +1,9 @@
 {% extends 'layouts/main.html' %}
-{% block title %}Mexico 2016{% endblock %}
+{% block title %}Brazil 2017{% endblock %}
 {% block content %}
 
 <div class="page-header">
-  <h1>2016 Cases</h1>
+  <h1>{{name}}</h1>
 </div>
 <!-- CREDITOS A https://gist.github.com/ponentesincausa/46d1d9a94ca04a56f93d?short_path=a291794 por el GEOJSON -->
 <div id='map'></div>
@@ -11,16 +11,17 @@
 	<!-- <script type="text/javascript" src="MxGEOJSON.js"></script> -->
 
 	<!-- DATA FROM: https://gist.github.com/ponentesincausa/46d1d9a94ca04a56f93d#file-mexico-json  -->
-	<script type="text/javascript" src="/static/js/2016Cases.js"" charset="UTF-8"></script> 
+	<!-- DATA FROM https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/brazil-states.geojson -->
+	<script type="text/javascript" src="static/js/BrazilCases2017.js" charset="UTF-8"></script> 
 	<script type="text/javascript" charset="UTF-8">
 
 	// var map = L.map('map').setView([37.8, -96], 4); //USA
-	var map = L.map("map").setView([23.5, -102], 4.5);
+	var map = L.map("map").setView([-15, -60], 2);
 
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZWxhcHVlc3Rvam9lIiwiYSI6ImNqZm9kaXE2eDFqa20yd21rYm95MmRhbmQifQ.3L-4e_qjwpRfAFIwCLgIRQ', {
-		maxZoom: 8,
+		maxZoom: 6,
 		minZoom:4,
-		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+		attribution: 'Zika cases retrieved from <a href="http://portalms.saude.gov.br/boletins-epidemiologicos">Ministério da Saúde</a>: Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
 			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
 			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 		id: 'mapbox.light'
@@ -37,7 +38,7 @@
 
 	info.update = function (props) {
 		this._div.innerHTML = '<h4>Zika cases per state</h4>' +  (props ?
-			'<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+			'<b>' + props.name + '</b><br />' + props.density + ' cases'
 			: 'Hover over a state');
 	};
 
@@ -46,13 +47,13 @@
 
 	// get color depending on population density value
 	function getColor(d) {
-		return d > 1500 ? '#800026' :
-				d > 1000  ? '#BD0026' :
-				d > 500  ? '#E31A1C' :
-				d > 250 ? '#FC4E2A' :
-				d > 100   ? '#FD8D3C' :
-				d > 50   ? '#FEB24C' :
-				d > 10  ? '#FED976' :
+		return d > 20000 ? '#800026' :
+				d > 15000  ? '#BD0026' :
+				d > 12000  ? '#E31A1C' :
+				d > 10000 ? '#FC4E2A' :
+				d > 5000   ? '#FD8D3C' :
+				d > 2000   ? '#FEB24C' :
+				d > 1000  ? '#FED976' :
 							'#FFEDA0';
 	}
 
@@ -116,7 +117,7 @@
 	legend.onAdd = function (map) {
 
 		var div = L.DomUtil.create('div', 'info legend'),
-			grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+			grades = [0, 1000, 2000, 5000, 10000, 12000, 15000, 20000],
 			labels = [],
 			from, to;
 
