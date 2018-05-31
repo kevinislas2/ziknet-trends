@@ -89,7 +89,7 @@ def lstmPredict(csvText, habitants):
 			predictions = model.predict(x)
 
 			predictions = np.apply_along_axis(lambda x: x * habitants / 100000, 1, predictions)
-			y = np.apply_along_axis(lambda x: x * habitants / 100000, y)
+			y = np.apply_along_axis(lambda x: x * habitants / 100000,0, y)
 
 			diff = len(y)+1 - len(predictions)
 
