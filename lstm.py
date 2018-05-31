@@ -87,7 +87,9 @@ def lstmPredict(csvText, habitants):
 		with tf.Session() as sess:
 			model = loadModel()
 			predictions = model.predict(x)
-			print(predictions)
+
+			predictions = np.apply_along_axis(lambda x: x * habitants / 100000, 1, predictions)
+			y = np.apply_along_axis(lambda x: x * habitants / 100000, 1, y)
 
 			diff = len(y)+1 - len(predictions)
 
@@ -95,7 +97,7 @@ def lstmPredict(csvText, habitants):
 				pred = predictions[i]
 				xYPred.append(diff+i)
 				yPred.append(pred)
-				# yPred.append(pred)
+
 		print(yPred)
 		print(y)
 		rmse = sqrt(mse(yPred[:-1], y))
