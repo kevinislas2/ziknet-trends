@@ -150,6 +150,14 @@ def brazil2017():
 		brazilCasesFile = brazilCasesFile,
 		name = name)
 
+@app.route("/brazil2018", methods=["GET"])
+def brazil2018():
+	brazilCasesFile = "static/js/brazilCases2018.js"
+	name = "Brazil 2018 Cases"
+	return render_template("pages/brasilCases2018.html", 
+		brazilCasesFile = brazilCasesFile,
+		name = name)
+
 @app.route("/team", methods=["GET"])
 def team():
 	return render_template("pages/team.html")

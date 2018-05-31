@@ -14,7 +14,7 @@
 
 <p class="lead">Information retrieved from search engines reflects a population's particular interest or concern regarding specific topics. Ziknet-Trends is a real time monitoring system that correlates changes in search patterns and previous incidence information to predict when a population is at risk of a Zika outbreak.</p>
 
-<p class="lead">The following graphs shows search patterns and the number of Zika cases in Mexico in 2016, there is a subtle yet noticeable correlation between search incidence and the total number of cases.</p>
+<p class="lead">The following graphs shows search patterns and the number of Zika cases in Brazil in 2016, there is a subtle yet noticeable correlation between search incidence and the total number of cases.</p>
 
 <br>
 <br>
@@ -239,6 +239,13 @@ We used a lag window of four weeks, this means that our LSTM network needs the s
 <div class="page-header">
   <h2 id="future_work">Future Work</h2>
 </div>
+
+<p class="lead">We're currently working on the following tasks:</p>
+<ul>
+	<li>Gather more data to train/test the LSTM network</li>
+	<li>Develop a real-time monitoring framework that uses our model to send an alert when a state is in danger of a potential outbreak</li>
+	<li>After an alert is received, our Ziknet-Epidemics project will use agent based simulations recommend an optimal control strategy, such as: Fogging, Sugar baits, Wolbachia, Oxitec, etc.</li>
+</ul>
 
 
 {% endblock %}

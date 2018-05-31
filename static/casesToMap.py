@@ -13,7 +13,7 @@ def readFile(filename):
 	return dictStates
 
 def main():
-	if len(sys.argv) != 3:
+	if len(sys.argv) != 4:
 		print("Usage: casesToMap.py filename.csv source.js output.js")
 		exit()
 
