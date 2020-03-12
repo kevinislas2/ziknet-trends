@@ -42,7 +42,7 @@ pickleshare==0.7.4
 Pillow==4.2.1
 prompt-toolkit==1.0.15
 protobuf==3.5.0.post1
-psutil==5.3.1
+psutil==5.6.6
 PuLP==1.6.8
 pycodestyle==2.3.1
 pyflakes==1.6.0
